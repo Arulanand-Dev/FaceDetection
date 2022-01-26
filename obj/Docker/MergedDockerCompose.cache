@@ -1,0 +1,101 @@
+services:
+  facesapi:
+    build:
+      context: D:\FacesAndFacesDockerAppliedCopy
+      dockerfile: Faces/FacesApi/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    image: facesapi
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      published: 5300
+      protocol: tcp
+  notificationservice:
+    build:
+      context: D:\FacesAndFacesDockerAppliedCopy
+      dockerfile: Notification/NotificationService/Dockerfile
+    depends_on:
+      rabbitmq:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    image: notificationservice
+    networks:
+      default: null
+  ordersapi:
+    build:
+      context: D:\FacesAndFacesDockerAppliedCopy
+      dockerfile: Orders/OrdersApi/Dockerfile
+    depends_on:
+      facesapi:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+      sqldbService:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      FacesApiUrl: http://facesapi
+      OrdersContextConnection: server=sqldbService;Database=OrdersApiDb;User Id=sa;Password=BigPassw0rd
+    image: ordersapi
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      published: 5200
+      protocol: tcp
+  rabbitmq:
+    container_name: rabbitmqFace
+    image: rabbitmq:3-management
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 15672
+      published: 15672
+      protocol: tcp
+    - mode: ingress
+      target: 5672
+      published: 5672
+      protocol: tcp
+  sqldbService:
+    container_name: sqlserver
+    environment:
+      ACCEPT_EULA: "true"
+      SA_PASSWORD: BigPassw0rd
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 1433
+      published: 1403
+      protocol: tcp
+  webmvc:
+    build:
+      context: D:\FacesAndFacesDockerAppliedCopy
+      dockerfile: FacesWeb/WebMvc/Dockerfile
+    depends_on:
+      ordersapi:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      OrdersApiUrl: http://ordersapi
+      SignalRHubUrl: http://localhost:5200
+    image: webmvc
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      published: 5100
+      protocol: tcp
+networks:
+  default:
+    name: dockercompose2326231905819098480_default

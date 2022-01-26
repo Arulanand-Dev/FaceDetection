@@ -1,0 +1,9 @@
+H:\AspNet5\FacesAndFacesDockerApplied\FacesSharedLib\MessagingInterfacesConstants\bin\Debug\net5.0\MessagingInterfacesConstants.deps.json
+H:\AspNet5\FacesAndFacesDockerApplied\FacesSharedLib\MessagingInterfacesConstants\bin\Debug\net5.0\MessagingInterfacesConstants.dll
+H:\AspNet5\FacesAndFacesDockerApplied\FacesSharedLib\MessagingInterfacesConstants\bin\Debug\net5.0\MessagingInterfacesConstants.pdb
+H:\AspNet5\FacesAndFacesDockerApplied\FacesSharedLib\MessagingInterfacesConstants\obj\Debug\net5.0\MessagingInterfacesConstants.csprojAssemblyReference.cache
+H:\AspNet5\FacesAndFacesDockerApplied\FacesSharedLib\MessagingInterfacesConstants\obj\Debug\net5.0\MessagingInterfacesConstants.AssemblyInfoInputs.cache
+H:\AspNet5\FacesAndFacesDockerApplied\FacesSharedLib\MessagingInterfacesConstants\obj\Debug\net5.0\MessagingInterfacesConstants.AssemblyInfo.cs
+H:\AspNet5\FacesAndFacesDockerApplied\FacesSharedLib\MessagingInterfacesConstants\obj\Debug\net5.0\MessagingInterfacesConstants.csproj.CoreCompileInputs.cache
+H:\AspNet5\FacesAndFacesDockerApplied\FacesSharedLib\MessagingInterfacesConstants\obj\Debug\net5.0\MessagingInterfacesConstants.dll
+H:\AspNet5\FacesAndFacesDockerApplied\FacesSharedLib\MessagingInterfacesConstants\obj\Debug\net5.0\MessagingInterfacesConstants.pdb

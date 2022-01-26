@@ -1,0 +1,107 @@
+version: '3.8'
+
+services:
+  facesapi:
+    image: facesapi:dev
+    container_name: FacesApi
+    build:
+      target: base
+      labels:
+        com.microsoft.created-by: "visual-studio"
+        com.microsoft.visual-studio.project-name: "FacesApi"
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
+      #- NUGET_FALLBACK_PACKAGES=$container_paths_to_fallback_packages_facesapi$
+    volumes:
+      - D:\FacesAndFacesDockerAppliedCopy\Faces\FacesApi:/app
+      - D:\FacesAndFacesDockerAppliedCopy:/src
+      - C:\Users\smart\vsdbg\vs2017u5:/remote_debugger:rw
+#$nuget_volume_mapping_facesapi$
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+
+    entrypoint: tail -f /dev/null
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "dotnet"
+      #com.microsoft.visualstudio.debuggee.arguments: " $debuggee_arguments_probing_paths_facesapi$ \"/app/bin/Debug/netcoreapp5.0/FacesApi.dll\""
+      com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
+      com.microsoft.visualstudio.debuggee.killprogram: "/bin/sh -c \"if PID=$$(pidof dotnet); then kill $$PID; fi\""
+    tty: true
+  notificationservice:
+    image: notificationservice:dev
+    container_name: NotificationService
+    build:
+      target: base
+      labels:
+        com.microsoft.created-by: "visual-studio"
+        com.microsoft.visual-studio.project-name: "NotificationService"
+    #environment:
+      #- NUGET_FALLBACK_PACKAGES=$container_paths_to_fallback_packages_notificationservice$
+    volumes:
+      - D:\FacesAndFacesDockerAppliedCopy\Notification\NotificationService:/app
+      - C:\Users\smart\vsdbg\vs2017u5:/remote_debugger:rw
+#$nuget_volume_mapping_notificationservice$
+    entrypoint: tail -f /dev/null
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "dotnet"
+      #com.microsoft.visualstudio.debuggee.arguments: " $debuggee_arguments_probing_paths_notificationservice$ \"/app/bin/Debug/net5.0/NotificationService.dll\""
+      com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
+      com.microsoft.visualstudio.debuggee.killprogram: "/bin/sh -c \"if PID=$$(pidof dotnet); then kill $$PID; fi\""
+    tty: true
+
+  ordersapi:
+    image: ordersapi:dev
+    container_name: OrdersApi
+    build:
+      target: base
+      labels:
+        com.microsoft.created-by: "visual-studio"
+        com.microsoft.visual-studio.project-name: "OrdersApi"
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
+      #- NUGET_FALLBACK_PACKAGES=$container_paths_to_fallback_packages_ordersapi$
+    volumes:
+      - D:\FacesAndFacesDockerAppliedCopy\Orders\OrdersApi:/app
+      - D:\FacesAndFacesDockerAppliedCopy:/src
+      - C:\Users\smart\vsdbg\vs2017u5:/remote_debugger:rw
+#$nuget_volume_mapping_ordersapi$
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+
+    entrypoint: tail -f /dev/null
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "dotnet"
+      #com.microsoft.visualstudio.debuggee.arguments: " $debuggee_arguments_probing_paths_ordersapi$ \"/app/bin/Debug/netcoreapp5.0/OrdersApi.dll\""
+      com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
+      com.microsoft.visualstudio.debuggee.killprogram: "/bin/sh -c \"if PID=$$(pidof dotnet); then kill $$PID; fi\""
+    tty: true
+
+  webmvc:
+    image: webmvc:dev
+    container_name: WebMvc
+    build:
+      target: base
+      labels:
+        com.microsoft.created-by: "visual-studio"
+        com.microsoft.visual-studio.project-name: "WebMvc"
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
+      #- NUGET_FALLBACK_PACKAGES=$container_paths_to_fallback_packages_webmvc$
+    volumes:
+      - D:\FacesAndFacesDockerAppliedCopy\FacesWeb\WebMvc:/app
+      - D:\FacesAndFacesDockerAppliedCopy:/src
+      - C:\Users\smart\vsdbg\vs2017u5:/remote_debugger:rw
+#$nuget_volume_mapping_webmvc$
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+
+    entrypoint: tail -f /dev/null
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "dotnet"
+      #com.microsoft.visualstudio.debuggee.arguments: " $debuggee_arguments_probing_paths_webmvc$ \"/app/bin/Debug/netcoreapp5.0/WebMvc.dll\""
+      com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
+      com.microsoft.visualstudio.debuggee.killprogram: "/bin/sh -c \"if PID=$$(pidof dotnet); then kill $$PID; fi\""
+    tty: true
